@@ -1,0 +1,169 @@
+.a{
+    text-decoration: none;
+    font-size: 17px;
+    color: #000000;
+    font-weight: bold;
+}
+
+    /* .whitetransparent {
+        font-size: 42px; 
+        color: transparent; 
+        -webkit-text-stroke: 2px rgb(0, 0, 0); 
+    } */
+
+.fa{
+    color: #000000;
+    font-size: 25px;
+}
+
+.navtitle{
+    color:rgb(0, 0, 0);
+    font-size: 23px;
+    font-weight: lighter;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+nav li {
+    display: inline-block;
+    margin-right: 20px;
+    position: relative; /* Create a stacking context for the dropdown */
+}
+
+nav a {
+    text-decoration: none;
+    color: #ffffff;
+    padding: 10px;
+}
+
+/* Style the dropdown content */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color:  #e3e3e3;
+    min-width: 120px;
+    z-index: 1; /* Ensure the dropdown appears above other elements */
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #000000;
+}
+
+/* Show the dropdown on hover */
+li.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.center {
+    text-align: center;
+}
+
+.image-container {
+    position: relative;
+    display: inline-block;
+}
+
+.overlay-button {
+    position: absolute;
+    bottom: 10px; /* Adjust the distance from the bottom as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+
+.floatimg{
+    border:solid rgb(204, 204, 204) 1px;
+    box-shadow: 20px 20px 10px black;
+    margin-left: 155%;
+     margin-top: 25%;
+
+    }
+
+.displaynone{
+    display: none;
+}
+
+
+/* Initial styles for expanddiv */
+
+/* Add your own styles for the share button and popup */
+.share-button {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#share-btn {
+    background-color: #0073e6;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+
+.popup-content {
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+}
+
+.share-options a {
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #333;
+}
+
+.share-options a:hover {
+    background-color: #f0f0f0;
+}
+
+.copy-link input {
+    width: 100%;
+    border: none;
+    background-color: #f0f0f0;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+#copy-btn {
+    background-color: #0073e6;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+#copy-btn:hover {
+    background-color: #0055a5;
+}
+/* Add styles for the close icon */
+.close-icon {
+    position: absolute;
+    top: 33%;
+    right: 40%;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+
+
+

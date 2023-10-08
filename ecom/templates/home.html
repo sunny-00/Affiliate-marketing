@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% block 'main' %}
+{% load static %}
+
+<div class="container-fluid">
+<br>
+    <div class="row">
+        <div class="col-md-1 mt-3">
+            <div>
+
+                <button class="btn btn-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
+                    Filter
+                    </button>
+                    <div class="offcanvas offcanvas-start text-bg-dark" data-bs-backdrop="offcanvas" tabindex="-1" id="staticBackdrop" aria-labelledby="staticBackdropLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="staticBackdropLabel">Filters</h5>
+                        <hr>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <form action="/home" method="POST">
+                          {% csrf_token %}
+                        <div>
+                            <h3>category</h3>
+                            <div class="form-check form-switch">
+                              {% if 'p' in select %}
+                                <input class="form-check-input" type="checkbox" role="switch" id="pant"  name="category" value="p" checked>
+                              {% else %}
+                              <input class="form-check-input" type="checkbox" role="switch" title="pant" id="pant1"  name="category" value="p">
+                              {% endif %}
+                                <label class="form-check-label" for="pant">pants</label>
+                              </div>
+                              <div class="form-check form-switch">
+                                {% if 'st' in select %}
+                                <input class="form-check-input" type="checkbox" role="switch" id="shirt"  name="category" value="st" checked>
+                                {% else %}
+                                <input class="form-check-input" type="checkbox" role="switch" title="shirt" id="shirt1"  name="category" value="st" >
+                                {% endif %}
+                                <label class="form-check-label" for="shirt">shirts</label>
+                              </div>
+                              <div class="form-check form-switch">
+                                {% if 't' in select %}
+                                <input class="form-check-input" type="checkbox" role="switch" id="t-shirt"  name="category" value="t" checked>
+                                {% else %}
+                                <input class="form-check-input" type="checkbox" role="switch" title="t-shirt" id="t-shirt1"  name="category" value="t">
+                                {% endif %}
+                                <label class="form-check-label" for="t-shirt">T-shirts</label>
+                              </div>
+                              <div class="form-check form-switch">
+                                {% if 'so' in select %}
+                                <input class="form-check-input" type="checkbox" role="switch" id="socks"  name="category" value="so" checked>
+                                {% else %}
+                                <input class="form-check-input" type="checkbox" role="switch" title="sock" id="socks1"  name="category" value="so">
+                                {% endif %}
+                                <label class="form-check-label" for="socks">Socks</label>
+                              </div>
+                              <div class="form-check form-switch">
+                                {% if 'sh' in select %}
+                                <input class="form-check-input" type="checkbox" role="switch" id="shoes"  name="category" value="sh" checked>
+                                {% else %}
+                                <input class="form-check-input" type="checkbox" role="switch" title="shoe" id="shoes1"  name="category" value="sh">
+                                {% endif %}
+                                <label class="form-check-label" for="shoes">Shoes</label>
+                              </div>
+                        </div>
+                        <div class="mt-2">
+                            <h3>Price</h3>
+                            <div class="btn-group" role="group" aria-label="Radio buttons">
+                              {% if l2h %}
+                                <input type="radio" class="btn-check" id="h2l2" name="p" value="h2l">
+                                <label class="btn btn-outline-secondary" for="h2l2">High to Low</label>
+                            
+                                <input type="radio" class="btn-check" id="l2h2" name="p" value="l2h" checked>
+                                <label class="btn btn-outline-secondary" for="l2h2">Low to High</label>
+                              {% elif h2l %}
+                              <input type="radio" class="btn-check" id="h2l1" name="p" value="h2l" checked>
+                                <label class="btn btn-outline-secondary" for="h2l1">High to Low</label>
+                            
+                                <input type="radio" class="btn-check" id="l2h1" name="p" value="l2h" >
+                                <label class="btn btn-outline-secondary" for="l2h1">Low to High</label>
+                              {% else %}
+                              <input type="radio" class="btn-check" id="h2l" name="p" value="h2l">
+                                <label class="btn btn-outline-secondary" for="h2l">High to Low</label>
+                            
+                                <input type="radio" class="btn-check" id="l2h" name="p" value="l2h">
+                                <label class="btn btn-outline-secondary" for="l2h">Low to High</label>
+                              {% endif %}
+                            </div>
+                            <br>
+                            <div class="input-group mt-4">
+                                <span class="input-group-text">min</span>
+                                <input type="number" class="form-control" placeholder="min" aria-label="min" min="0" name="min" value="{{min}}">
+                                <span class="input-group-text">max</span>
+                                <input type="number" class="form-control" placeholder="max" aria-label="max" min="1" name="max" value="{{max}}">
+                              </div> 
+                        </div>
+                        <button class="btn btn-success mt-3" type="submit">Apply filter</button>
+                        <button class="btn btn-danger mt-3" type="submit"  value="reset" name="reset" >Reset</button>
+                    </form>
+                    </div>
+                    </div>
+    
+    
+            </div>
+        </div>
+        <br>
+        <div class="col-md-11 mt-3">
+            <div class="row">
+                {% for x in products %}
+                <div class="col-md-4">
+                    <div class="card ms-3 mb-5" style="width: 80%">
+                        <img src="{{ x.pimage.url }}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h5 class="card-title">{{x.name}}</h5>
+                          <p class="card-text">{{x.category_code.category}}</p>
+                          <p class="card-text">{{x.price}}</p>
+                          <a href="/details/{{x.id}}" class="btn btn-dark">More details</a>
+                          {% if promoter %}
+                          <a href="/details/{{x.id}}" class="btn btn-dark">Promote</a>
+                          {% endif %}
+                        </div>
+                      </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <!-- <div class="col-md-2"></div> -->
+    </div>
+
+</div>
+
+{% endblock 'main' %}

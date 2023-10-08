@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block 'main' %}
+{% load static %}
+
+<div class="container">
+    <br>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            {% if add %}
+            <div class="alert alert-danger" role="alert">
+               {{add}}
+              </div>
+            {% endif %}
+            <form action="/save">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">First Name</span>
+                <input type="text" placeholder="{{firstname}}" name="fname" value="{{firstname}}" class="form-control" id="fname" aria-describedby="basic-addon1" disabled readonly autofocus>
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon2">Last Name</span>
+                <input type="text" placeholder="{{lastname}}" name="lname" value="{{lastname}}" class="form-control" id="lname" aria-describedby="basic-addon1" disabled readonly>
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon3">referral_id :</span>
+                <input type="text" placeholder="{{referral_id}}" name="referral_id" value="{{referral_id}}" class="form-control" id="referral_id" aria-describedby="basic-addon1" disabled readonly>
+
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon2">Address</span>
+                <input type="text" placeholder="{{address}}" name="address" value="{{address}}" class="form-control" id="address" aria-describedby="basic-addon1" disabled readonly>
+              </div>  
+              {% if promoter %}
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon2">comission</span>
+                <input type="text" placeholder="{{totalcommission}}" name="totalcommission" value="{{totalcommission}}" class="form-control" id="totalcommission" aria-describedby="basic-addon1" disabled readonly>
+              </div>  
+              {% endif %}
+                <a class="nav-link navtitle"><button class="btn btn-success displaynone" type="submit" id="togglesave">save</button></a>
+            </form>
+                <a class="nav-link navtitle"><button class="btn btn-danger" type="submit" id="toggleedit" onclick="edit()">Edit</button></a>
+
+                <br>
+                {% if promoter %}
+                <a class="nav-link navtitle" href="/buyer"><button class="btn btn-warning">Switch to Buyer</button></a>
+                {% else %}
+                <a class="nav-link navtitle" href="/promoter"><button class="btn btn-warning">Switch to Promoter</button></a>
+                {% endif %}
+                <br>
+                <a class="nav-link navtitle" href="/logout"><button class="btn btn-danger">logout</button></a>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+
+
+
+{% endblock 'main' %}

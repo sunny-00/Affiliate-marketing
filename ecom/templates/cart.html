@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block 'main' %}
+{% load static %}
+
+        <!-- main details -->
+        <div class="row">
+            <!-- details -->
+            <div class="col-md-9">
+                <!-- customer detail -->
+                <div class="card" style="width: 100%;border: solid;">
+                    <div class="card-header">
+                        <h4><strong>Customer details</strong></h4>
+                      </div>
+                    <div class="card-body">
+                      <p class="card-text"><strong>Customer Name :</strong> {{firstname}} {{lastname}}</p>
+                      <p class="card-text"><strong>Email ID :</strong> {{mail}}</p>
+                      <p class="card-text"><Strong>Address :</Strong> {{address}}</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div>
+                    <div class="card shadow-lg" style="width: 100%;border: solid;  overflow: hidden;">
+                        {% for product in products %}
+                        <div class="row" style="background-color: rgb(180, 180, 180);">
+                            <div class="col-md-3">
+                                <img src="{{ product.pid.pimage.url }}" class="card-img-top" alt="...">
+                            </div>
+                            <div class="col-md-9">
+                                <div class="card-body">
+                                    <br>
+                                    <p class="card-text"><strong>Name: {{ product.pid.name }}</strong> </p>
+                                    <!-- <p class="card-text"><strong>Category: {{ product.pid.category_code_id }}</strong> </p> -->
+                                    <p class="card-text"><strong>Price:</strong> {{ product.pid.price }}</p>
+                                    <!-- Add other relevant fields here -->
+                                    <form action="/remove/{{product.pid.id}}">
+                                        <button type="submit" class="btn btn-danger">Remove</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        {% endfor %}
+                        
+                        
+                      </div>
+                  </div>
+                  <br>
+
+            </div>
+            {% if len == 0 %}
+            <p>add products to cart</p>
+            {% else %}
+             <!-- payment details -->
+             <div class="col-md-3">
+              <div class="card">
+                  <div class="card-header">
+                    Payment Details
+                  </div>
+                  <div class="card-body">
+                      <p class="card-text"><strong>Price :</strong>Rs.10000</p>
+                      <p class="card-text"><strong>Piece :</strong> 2 </p>
+                      <form action="/placeorder" method="POST">
+                        {% csrf_token %}
+                        <input name="referral" type="text" placeholder="referral">                        
+                      <hr>
+                      <input type="hidden" name="total0" value="{{totalamt}}" placeholder="{{totalamt}}">
+                      <p class="card-title"><Strong>Total Price : {{totalamt}}/-</Strong></p>
+                      <hr>
+                    <button type="submit" class="btn btn-success">Place order</button>
+                  </form>
+                  </div>
+                </div>
+                <br>
+                <a href="/home" class="btn btn-info">Shop more</a>
+          </div>
+            {% endif %}
+
+            
+
+        </div>
+
+{% endblock 'main' %}

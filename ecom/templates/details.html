@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block 'main' %}
+{% load static %}
+
+        <!-- main -->
+        <div class="row mt-3">
+            <!-- product image -->
+            {% for x in products %}
+            <div class="col-md-6">
+                    <h4>Product Image</h4>
+                    <hr>
+                    <img src="{{x.pimage.url}}" alt="" class="ps-5" width="90%">
+            </div>
+            <!-- product details -->
+            <div class="col-md-6">
+                    <h4>Product Details</h4>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-9 mt-5">
+                            <Strong>Product-Name :- </Strong>{{x.name}}
+                            <br><br>
+                            <strong>Product Price :- </strong>{{x.price}}
+                            <br><br>
+                            {% if x.category_code_id == 'p' %}
+                            <strong>Category :- </strong>Pant
+                            {% elif x.category_code_id == 'sh' %}
+                            <strong>Category :- </strong>Shoe
+                            {% elif x.category_code_id == 'so' %}
+                            <strong>Category :- </strong>Socks
+                            {% elif x.category_code_id == 'st' %}
+                            <strong>Category :- </strong>Shirts
+                            {% else %}
+                            <strong>Category :- </strong>t-shirts
+                            {% endif %}
+                            <br><br>
+                            <strong>Product Details :- </strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae eveniet et facilis quod quam explicabo nisi. Et, tempora eum. Aliquid natus architecto praesentium eligendi, beatae nulla obcaecati optio assumenda tempora.
+                            <br><br>
+                            {% if promoter %}
+                            <strong>Promoting Percentage :- </strong>{{percent}}
+                          <div class="share-button">
+                            <input type="hidden" id="link1" placeholder="{{x.promoting_link}}" value="{{x.promoting_link}}">
+                            <button id="share-btn" onclick="share()">Promote</button>
+                        </div>
+                        <div class="popup" id="popup">
+                            <div class="popup-content">
+                                <span id="close-btn" class="close-icon">&times;</span>
+                                <div class="share-options">
+                                    <a href="#" id="facebook">Facebook</a>
+                                    <a href="#" id="twitter">Twitter</a>
+                                    <a href="#" id="linkedin">LinkedIn</a>
+                                </div>
+                                <div class="copy-link">
+                                    <input type="text" id="video-link" readonly>
+                                    <button id="copy-btn">Copy Link</button>
+                                </div>
+                            </div>
+                        </div>
+                          {% else %}
+                          <a href="/addcart/{{x.id}}"><button class="btn btn-success">Add to cart</button></a>
+                          <a href="/cart"><button class="btn btn-info">View Cart</button></a>
+                          <a href="/home"><button class="btn btn-warning">Shop more</button></a>
+                          {% endif %}
+                            <br>
+                            {% if success %}
+                        <div class="alert alert-success" role="alert">
+                           {{success}}
+                          </div>
+                        {% endif %}
+                        {% if dup %}
+                        <div class="alert alert-danger" role="alert">
+                           {{dup}}
+                          </div>
+                        {% endif %}
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+
+            </div>
+            {% endfor %}
+        </div>
+
+
+{% endblock 'main' %}
