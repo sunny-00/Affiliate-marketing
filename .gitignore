@@ -1,0 +1,13 @@
+# Ignore Python bytecode files
+__pycache__/
+*.pyc
+
+# Ignore the virtual environment directory
+env/
+
+# Ignore database files
+db.sqlite3
+
+# Ignore sensitive or secret information (config files, credentials)
+*.env
+secret_key.txt
